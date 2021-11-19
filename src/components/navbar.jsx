@@ -1,5 +1,8 @@
 import React from "react"
-// import SearchBar from "./searchbar";
+
+//components
+import SearchBar from "./searchbar"
+
 // import PokemonCard from "./pokemon";
 // import { getPokemonData, getPokemons, searchPokemon } from "../api";
 // import "../styles/navbar.scss";
@@ -60,6 +63,7 @@ const Navbar = () => {
             alt="logo"
           />
         </a>
+        <SearchBar />
       </div>
     </nav>
   )

@@ -1,11 +1,8 @@
 import * as React from "react"
 
-//Styles
-import "bootstrap/dist/css/bootstrap.min.css"
-
 //Components
+import PokemonModal from "../components/pokemon-modal"
 import Navbar from "../components/navbar"
-import SearchBar from "../components/searchbar"
 import Pokedex from "../components/pokedex"
 
 // import { getPokemons } from "./api"
@@ -31,16 +28,16 @@ const IndexPage = () => {
   // }, [])
   return (
     <>
-      <header>
+      <header className="container">
         <Navbar />
-        <SearchBar />
+        <div className="w-100 border-bottom"></div>
       </header>
 
       <div className="container">
         <div className="row" id="panel">
-          <div className="col-md-2" id="filters">
+          <div className="border-end col-12 col-md-3" id="filters">
             <span>Filters</span>icono de filtro
-            <div>separador</div>
+            <div className="w-100 border-bottom"></div>
             <div className="type-filter">
               <span>Type:</span>
               <div className="row">
@@ -60,12 +57,12 @@ const IndexPage = () => {
                 </div>
               </div>
             </div>
-            <div>separador</div>
+            <div className="w-100 border-bottom"></div>
             <div className="color-filter">
               <span>Color:</span>
               colores: 5x2
             </div>
-            <div>separador</div>
+            <div className="w-100 border-bottom"></div>
             <div className="gender-filter">
               <span>Gender:</span>
               <div className="form-check">
@@ -115,8 +112,10 @@ const IndexPage = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-10" id="rigth-panel">
+          <div className="col-12 col-md-9" id="rigth-panel">
             <span>Choose a pokemon to get more information</span>
+            <PokemonModal />
+            <button className="btn-warning">Load more</button>
             <div className="pokemon-list">
               {/* <Pokedex pokemons={pokemons}></Pokedex> */}
             </div>
