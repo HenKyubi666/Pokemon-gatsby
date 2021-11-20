@@ -1,7 +1,5 @@
 import * as React from "react"
 
-import "../components/404.scss"
-
 const NotFoundPage = () => (
   <div className="body-404">
     <div className="container-404">

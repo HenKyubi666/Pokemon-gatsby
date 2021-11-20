@@ -1,0 +1,31 @@
+.fire {
+  background-color: red;
+  color: white;
+}
+
+.movie-component {
+  border-radius: 5px;
+  box-shadow: 8px 14px 38px rgba(39, 44, 49, 0.06),
+    1px 3px 8px rgba(39, 44, 49, 0.03);
+  transition: all 0.5s ease;
+}
+.movie-component:hover {
+  transform: translate3D(0, -1px, 0) scale(1.05); /* move up slightly and zoom in */
+  box-shadow: 8px 28px 50px rgba(39, 44, 49, 0.07),
+    1px 6px 12px rgba(39, 44, 49, 0.04);
+  transition: all 0.4s ease; /* zoom in */
+  cursor: pointer;
+}
+
+.colors-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2% 2%;
+  grid-template-areas:
+    ". . . . ."
+    ". . . . .";
+  .black {
+    background-color: black;
+  }
+}

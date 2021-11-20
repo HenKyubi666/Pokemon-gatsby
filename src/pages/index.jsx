@@ -16,12 +16,11 @@ const IndexPage = () => {
   const fetchPokemons = async () => {
     try {
       const data = await getPokemons(next)
+      setPokemons(prevArray => [...prevArray, ...data.results])
+      setNext(data.next)
       console.log("data", data)
-      setPokemons(data.results)
-      setNext([...pokemons, data.next])
-      // setPokemons(data.results)
     } catch (err) {
-      alert(err)
+      console.log("err", err)
     }
   }
 
@@ -35,7 +34,6 @@ const IndexPage = () => {
         <Navbar />
         <div className="w-100 border-bottom"></div>
       </header>
-
       <div className="container">
         <div className="row" id="panel">
           <div className="border-end col-12 col-md-3" id="filters">
@@ -64,7 +62,7 @@ const IndexPage = () => {
             <div className="w-100 border-bottom"></div>
             <div className="color-filter">
               <span>Color:</span>
-              colores: 5x2
+              <div className="colors-container"></div>
             </div>
             <div className="w-100 border-bottom"></div>
             <div className="gender-filter">
@@ -119,13 +117,15 @@ const IndexPage = () => {
           <div className="col-12 col-md-9" id="rigth-panel">
             <span>Choose a pokemon to get more information</span>
             <PokemonModal />
-            <button className="btn-warning">Load more</button>
-            <div className="pokemon-list">
-              {pokemons.map(({ data, index }) => {
-                return <PokemonCard data={data} />
+            <div className="d-flex flex-wrap">
+              {pokemons.map(item => {
+                return <PokemonCard data={item} key={item?.name} />
               })}
               {/* <Pokedex pokemons={pokemons}></Pokedex> */}
             </div>
+            <button className="btn-warning" onClick={() => fetchPokemons()}>
+              Load more
+            </button>
           </div>
         </div>
       </div>

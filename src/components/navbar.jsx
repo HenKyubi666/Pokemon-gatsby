@@ -5,7 +5,7 @@ import SearchBar from "./searchbar"
 
 // import PokemonCard from "./pokemon";
 // import { getPokemonData, getPokemons, searchPokemon } from "../api";
-// import "../styles/navbar.scss";
+
 const Navbar = () => {
   //   const [pokemons, setPokemons] = useState([]);
   //   const [page, setPage] = useState(0);

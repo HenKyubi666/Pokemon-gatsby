@@ -1,24 +1,31 @@
 import React from "react"
 import classNames from "classnames"
+// import Lottie from "react-lottie"
 
-const PokemonCard = ({ pokemon = [] }) => {
+//animations
+// import animationThunder from "../animations/thunder.json"
+const PokemonCard = ({ data }) => {
+  // const defaultOptions = {
+  //   loop: true,
+  //   autoplay: true,
+  //   animationData: animationThunder,
+  //   rendererSettings: {
+  //     preserveAspectRatio: "xMidYMid slice",
+  //   },
+  // }
+
   return (
     <>
-      <div className="card col-12 col-md-4">
-        <img src={pokemon.src} className="card-img-top" alt={pokemon.img} />
-        <div className="card-body">
-          <p className="card-text">
-            {pokemon.name} {pokemon.id}
-          </p>
-          <div>
-            types
-            {pokemon.map((item, index) => {
-              return (
-                <div className={classNames({ fire: item.type === "fire" })}>
-                  {item.type}
-                </div>
-              )
-            })}
+      <div className="h-100 col-4 p-2">
+        <div className="card shadow-sm movie-component">
+          {/* <Lottie options={defaultOptions} height={400} width={400}></Lottie> */}
+          <img
+            src={data?.data?.sprites?.front_default}
+            className="card-img-top"
+            alt={data?.name}
+          />
+          <div className="card-body">
+            <p className="card-text">{data?.name}</p>
           </div>
         </div>
       </div>
