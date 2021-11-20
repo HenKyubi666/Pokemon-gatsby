@@ -53,23 +53,20 @@ export const getInitialPokemons = (initial = 0) => {
       const max =
         initial + 20 >= data.pokemon_entries.length
           ? null
-          : data.pokemon_entries.length - initial + 20 <= 20
+          : data.pokemon_entries.length - initial + 20 > 20
           ? initial + 20
           : data.pokemon_entries.length - initial + 20
-      console.log('max', max)
-      if (max !== null) {
-        // Save data.pokemon_entries in localstorage
-        for (let i = initial; i <= max; i++) {
-          // data.pokemon_entries[i].data = await fetchPokemonData(
-          //   data.pokemon_entries[i].entry_number
-          // )
-          // res.results[i].specie = await fetchPokemonSpecie(
-          //   Number(data.pokemon_entries[i].entry_number)
-          // )
-        }
+      if (!max) reject("No hay más pokémons")
+      // Save data.pokemon_entries in localstorage
+      for (let i = initial || 0; i <= max; i++) {
+        data.pokemon_entries[i].data = await fetchPokemonData(
+          data.pokemon_entries[i].entry_number
+        )
+        data.pokemon_entries[i].specie = await fetchPokemonSpecie(
+          Number(data.pokemon_entries[i].entry_number)
+        )
       }
-      let res = { results: data.pokemon_entries }
-      console.log("getInitial", res)
+      let res = { results: data.pokemon_entries, next: max }
       resolve(res)
     } catch (error) {
       reject(error)

@@ -18,8 +18,12 @@ const IndexPage = () => {
 
   const fetchPokemons = async () => {
     try {
-      const data = await getPokemons(next)
-      setPokemons(prevArray => [...prevArray, ...data.results])
+      // const data = await getPokemons(next)
+      // setPokemons(prevArray => [...prevArray, ...data.results])
+      // setNext(data.next)
+
+      const data = await getInitialPokemons(next)
+      setPokemons(data.results)
       setNext(data.next)
       console.log("data", data)
     } catch (err) {
@@ -29,7 +33,7 @@ const IndexPage = () => {
 
   useEffect(() => {
     fetchPokemons()
-    getInitialPokemons()
+    getInitialPokemons(next)
   }, [getInitialPokemons])
 
   return (
@@ -55,7 +59,9 @@ const IndexPage = () => {
             <PokemonModal />
             <div className="d-flex flex-wrap">
               {pokemons.map(item => {
-                return <PokemonCard data={item} key={item?.name} />
+                return (
+                  <PokemonCard data={item} key={item?.pokemon_species?.name} />
+                )
               })}
             </div>
             {next && (

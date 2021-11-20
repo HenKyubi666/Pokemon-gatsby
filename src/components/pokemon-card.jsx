@@ -22,10 +22,11 @@ const PokemonCard = ({ data }) => {
           <img
             src={data?.data?.sprites?.front_default}
             className="card-img-top"
-            alt={data?.name}
+            alt={data?.pokemon_species?.name}
           />
           <div className="card-body">
-            <p className="card-text">{data?.name}</p>
+            <p className="card-text">{data?.pokemon_species?.name}</p>
+            <p className="card-text">ID: {data?.entry_number}</p>
           </div>
         </div>
       </div>
