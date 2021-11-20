@@ -23,9 +23,7 @@ const SearchBar = () => {
 
   return (
     <div className="d-flex form-search">
-      <button className="btn btn-search" type="submit" onClick="{onClick}">
-        {/* <SearchIcon></SearchIcon> */}
-      </button>
+      <i className="fas fa-search"></i>
       <input
         className="form-control"
         type="search"

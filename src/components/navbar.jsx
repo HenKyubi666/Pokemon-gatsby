@@ -55,7 +55,7 @@ const Navbar = () => {
   //     setSearching(false);
   //   };
   return (
-    <nav className="navbar navbar-light">
+    <nav className="navbar">
       <div className="container-fluid">
         <a className="navbar-brand" href="https://pokeapi.co/">
           <img

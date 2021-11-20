@@ -1,4 +1,5 @@
 import React from "react"
+import PokemonEvolution from "./pokemon-evolution"
 
 const PokemonModal = () => {
   return (
@@ -71,9 +72,9 @@ const PokemonModal = () => {
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
       >
-        Launch demo modal
+        Pokemon
       </button>
-      {/*<!-- Modal --> */}
+      {/* <!-- Modal --> */}
       <div
         class="modal fade"
         id="exampleModal"
@@ -81,12 +82,12 @@ const PokemonModal = () => {
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content p-2">
+            <div class="d-flex justify-content-end ">
+              {/* <h5 class="modal-title" id="exampleModalLabel">
                 Modal title
-              </h5>
+              </h5> */}
               <button
                 type="button"
                 class="btn-close"
@@ -94,18 +95,55 @@ const PokemonModal = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">...</div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" class="btn btn-primary">
-                Save changes
-              </button>
+            <div class="modal-body">
+              <div className="row">
+                <div className="col-12 col-md-6">
+                  <img src="" alt="" />
+                </div>
+                <div className="col-12 col-md-6">
+                  <div className="d-flex">
+                    <h2>Pokemon Name</h2>
+                    <div>id</div>
+                  </div>
+                  <p>Description</p>
+                  {/* {pokemon.map((item, index) => {
+                    return ( */}
+                  <table className="table table-striped table-hover">
+                    <tr>
+                      <th>Height:</th>
+                      <td>pokemon.Height</td>
+                    </tr>
+                    <tr>
+                      <th>Weight:</th>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th>Category:</th>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th>Gender:</th>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th>Habitat:</th>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th>Color:</th>
+                      <td></td>
+                    </tr>
+                  </table>
+                  {/* )
+                  })} */}
+                  <h4>Types:</h4>
+                </div>
+                <div className="col-12">
+                  <h3>Evolution</h3>
+                  <PokemonEvolution />
+                  <p>This pokemon does not evolve</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

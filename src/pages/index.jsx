@@ -1,33 +1,36 @@
-import * as React from "react"
+import React, { useState, useEffect } from "react"
+import AppContext from "../context/app-context"
 
 //Components
 import PokemonModal from "../components/pokemon-modal"
 import Navbar from "../components/navbar"
-import Pokedex from "../components/pokedex"
+import PokemonCard from "../components/pokemon-card"
+// import Pokedex from "../components/pokedex"
 
-// import { getPokemons } from "./api"
-
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
-
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+import { getPokemons } from "../api"
 
 const IndexPage = () => {
-  // const [pokemons, setPokemons] = useState([])
+  const [pokemons, setPokemons] = useState([])
+  const [next, setNext] = useState(null)
 
-  // const fetchPokemons = async () => {
-  //   try {
-  //     const data = await getPokemons()
-  //     // console.log(data);
-  //     setPokemons(data.results)
-  //   } catch (err) {}
-  // }
-  // useEffect(() => {
-  //   fetchPokemons()
-  // }, [])
+  const fetchPokemons = async () => {
+    try {
+      const data = await getPokemons(next)
+      console.log("data", data)
+      setPokemons(data.results)
+      setNext([...pokemons, data.next])
+      // setPokemons(data.results)
+    } catch (err) {
+      alert(err)
+    }
+  }
+
+  useEffect(() => {
+    fetchPokemons()
+  }, [])
+
   return (
-    <>
+    <AppContext.Provider>
       <header className="container">
         <Navbar />
         <div className="w-100 border-bottom"></div>
@@ -36,7 +39,8 @@ const IndexPage = () => {
       <div className="container">
         <div className="row" id="panel">
           <div className="border-end col-12 col-md-3" id="filters">
-            <span>Filters</span>icono de filtro
+            <span>Filters</span>
+            <i className="bi bi-funnel-fill"></i>
             <div className="w-100 border-bottom"></div>
             <div className="type-filter">
               <span>Type:</span>
@@ -117,12 +121,15 @@ const IndexPage = () => {
             <PokemonModal />
             <button className="btn-warning">Load more</button>
             <div className="pokemon-list">
+              {pokemons.map(({ data, index }) => {
+                return <PokemonCard data={data} />
+              })}
               {/* <Pokedex pokemons={pokemons}></Pokedex> */}
             </div>
           </div>
         </div>
       </div>
-    </>
+    </AppContext.Provider>
   )
 }
 
