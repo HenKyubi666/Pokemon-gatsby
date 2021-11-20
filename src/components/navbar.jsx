@@ -56,7 +56,7 @@ const Navbar = () => {
   //   };
   return (
     <nav className="navbar">
-      <div className="container-fluid">
+      <div className="container-fluid justify-content-center justify-content-md-between">
         <a className="navbar-brand" href="https://pokeapi.co/">
           <img
             src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png"

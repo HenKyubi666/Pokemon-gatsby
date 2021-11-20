@@ -5,9 +5,12 @@ import AppContext from "../context/app-context"
 import PokemonModal from "../components/pokemon-modal"
 import Navbar from "../components/navbar"
 import PokemonCard from "../components/pokemon-card"
-// import Pokedex from "../components/pokedex"
+import FilterType from "../components/filter-type"
+import FilterColors from "../components/filter-colors"
+import FilterGender from "../components/filter-gender"
 
-import { getPokemons } from "../api"
+//API
+import { getPokemons, getInitialPokemons } from "../api"
 
 const IndexPage = () => {
   const [pokemons, setPokemons] = useState([])
@@ -26,7 +29,8 @@ const IndexPage = () => {
 
   useEffect(() => {
     fetchPokemons()
-  }, [])
+    getInitialPokemons()
+  }, [getInitialPokemons])
 
   return (
     <AppContext.Provider>
@@ -36,83 +40,15 @@ const IndexPage = () => {
       </header>
       <div className="container">
         <div className="row" id="panel">
-          <div className="border-end col-12 col-md-3" id="filters">
+          <div className="border-end col-12 col-md-3 p-0" id="filters">
             <span>Filters</span>
-            <i className="bi bi-funnel-fill"></i>
+            <i class="fas fa-filter"></i>
             <div className="w-100 border-bottom"></div>
-            <div className="type-filter">
-              <span>Type:</span>
-              <div className="row">
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor="flexCheckDefault"
-                  >
-                    Default checkbox
-                  </label>
-                </div>
-              </div>
-            </div>
+            <FilterType />
             <div className="w-100 border-bottom"></div>
-            <div className="color-filter">
-              <span>Color:</span>
-              <div className="colors-container"></div>
-            </div>
+            <FilterColors />
             <div className="w-100 border-bottom"></div>
-            <div className="gender-filter">
-              <span>Gender:</span>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="gender-filter"
-                  id="all"
-                  checked
-                />
-                <label className="form-check-label" htmlFor="all">
-                  All
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="gender-filter"
-                  id="male"
-                />
-                <label className="form-check-label" htmlFor="male">
-                  Male
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="gender-filter"
-                  id="female"
-                />
-                <label className="form-check-label" htmlFor="female">
-                  Female
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="gender-filter"
-                  id="undefined"
-                />
-                <label className="form-check-label" htmlFor="undefined">
-                  Undefined
-                </label>
-              </div>
-            </div>
+            <FilterGender />
           </div>
           <div className="col-12 col-md-9" id="rigth-panel">
             <span>Choose a pokemon to get more information</span>
@@ -121,11 +57,14 @@ const IndexPage = () => {
               {pokemons.map(item => {
                 return <PokemonCard data={item} key={item?.name} />
               })}
-              {/* <Pokedex pokemons={pokemons}></Pokedex> */}
             </div>
-            <button className="btn-warning" onClick={() => fetchPokemons()}>
-              Load more
-            </button>
+            {next && (
+              <div className="d-flex justify-content-center">
+                <button className="btn-warning" onClick={() => fetchPokemons()}>
+                  Load more
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

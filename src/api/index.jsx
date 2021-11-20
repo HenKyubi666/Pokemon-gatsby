@@ -56,6 +56,7 @@ export const getInitialPokemons = (initial = 0) => {
           : data.pokemon_entries.length - initial + 20 <= 20
           ? initial + 20
           : data.pokemon_entries.length - initial + 20
+      console.log('max', max)
       if (max !== null) {
         // Save data.pokemon_entries in localstorage
         for (let i = initial; i <= max; i++) {
