@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import AppContext from "../context/app-context"
+import ModalContext from "../context/modal-context"
 
 //Components
 import PokemonModal from "../components/pokemon-modal"
@@ -10,11 +11,13 @@ import FilterColors from "../components/filter-colors"
 import FilterGender from "../components/filter-gender"
 
 //API
-import { getPokemons, getInitialPokemons } from "../api"
+import { getInitialPokemons } from "../api"
 
 const IndexPage = () => {
   const [pokemons, setPokemons] = useState([])
+  const [pokemonDataModal, setPokemonDataModal] = useState(null)
   const [next, setNext] = useState(null)
+  const [max, setMax] = useState(null)
 
   const fetchPokemons = async () => {
     try {
@@ -33,8 +36,7 @@ const IndexPage = () => {
 
   useEffect(() => {
     fetchPokemons()
-    getInitialPokemons(next)
-  }, [getInitialPokemons])
+  }, [])
 
   return (
     <AppContext.Provider>
@@ -55,16 +57,25 @@ const IndexPage = () => {
             <FilterGender />
           </div>
           <div className="col-12 col-md-9" id="rigth-panel">
-            <span>Choose a pokemon to get more information</span>
-            <PokemonModal />
-            <div className="d-flex flex-wrap">
-              {pokemons.map(item => {
-                return (
-                  <PokemonCard data={item} key={item?.pokemon_species?.name} />
-                )
-              })}
-            </div>
-            {next && (
+            <span className="col-12">
+              Choose a pokemon to get more information
+            </span>
+            <ModalContext.Provider
+              value={{ data: pokemonDataModal, setData: setPokemonDataModal }}
+            >
+              <PokemonModal />
+              <div className="d-flex flex-wrap">
+                {pokemons.map(item => {
+                  return (
+                    <PokemonCard
+                      data={item}
+                      key={item?.pokemon_species?.name}
+                    />
+                  )
+                })}
+              </div>
+            </ModalContext.Provider>
+            {max && (
               <div className="d-flex justify-content-center">
                 <button className="btn-warning" onClick={() => fetchPokemons()}>
                   Load more

@@ -1,8 +1,9 @@
 .circle {
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
-  background: #5cb85c;
+  border-width: 10px;
+  border-color: black;
 }

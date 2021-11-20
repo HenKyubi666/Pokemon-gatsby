@@ -1,3 +1,7 @@
+.tag {
+  border-radius: 50% 10% 10% 50%;
+}
+
 .black {
   background-color: black;
   color: white;
@@ -48,13 +52,13 @@
   color: black;
 }
 
-.movie-component {
+.pokemon-component {
   border-radius: 5px;
   box-shadow: 8px 14px 38px rgba(39, 44, 49, 0.06),
     1px 3px 8px rgba(39, 44, 49, 0.03);
   transition: all 0.5s ease;
 }
-.movie-component:hover {
+.pokemon-component:hover {
   transform: translate3D(0, -1px, 0) scale(1.05); /* move up slightly and zoom in */
   box-shadow: 8px 28px 50px rgba(39, 44, 49, 0.07),
     1px 6px 12px rgba(39, 44, 49, 0.04);

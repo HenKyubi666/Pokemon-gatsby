@@ -73,3 +73,31 @@ export const getInitialPokemons = (initial = 0) => {
     }
   })
 }
+
+export const getFilterNames = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const { data } = await axios.get(`${URL}type/`)
+      resolve(data)
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
+export const getFilterPokemons = (data = [], filter = []) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let arr = []
+      for (let i = 0; i < filter.length; i++) {
+        const newFilter = data.filter(pokemon =>
+          pokemon.data.types.filter(type => type.type.name == filter[i])
+        )
+        arr.push(newFilter)
+      }
+      resolve(arr)
+    } catch (error) {
+      reject(error)
+    }
+  })
+}

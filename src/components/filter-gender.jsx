@@ -1,6 +1,33 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
+import { getFilterNames } from "../api"
 
 const FilterGender = () => {
+  const [filters, setFilters] = useState([])
+  const [checkedState, setCheckedState] = useState(
+    new Array(filters.length).fill(false)
+  )
+
+  const handleOnChange = position => {
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
+    )
+    setCheckedState(updatedCheckedState)
+  }
+
+  const fetchfilterNames = async () => {
+    try {
+      const data = await getFilterNames()
+      setFilters(data.results)
+      console.log("filter", data)
+    } catch (err) {
+      console.log("err", err)
+    }
+  }
+
+  useEffect(() => {
+    fetchfilterNames()
+  }, [])
+
   return (
     <div className="gender-filter">
       <span>Gender:</span>
@@ -16,39 +43,26 @@ const FilterGender = () => {
           All
         </label>
       </div>
-      <div className="form-check">
-        <input
-          className="form-check-input"
-          type="radio"
-          name="gender-filter"
-          id="male"
-        />
-        <label className="form-check-label" htmlFor="male">
-          Male
-        </label>
-      </div>
-      <div className="form-check">
-        <input
-          className="form-check-input"
-          type="radio"
-          name="gender-filter"
-          id="female"
-        />
-        <label className="form-check-label" htmlFor="female">
-          Female
-        </label>
-      </div>
-      <div className="form-check">
-        <input
-          className="form-check-input"
-          type="radio"
-          name="gender-filter"
-          id="undefined"
-        />
-        <label className="form-check-label" htmlFor="undefined">
-          Undefined
-        </label>
-      </div>
+      {filters.length > 0 &&
+        filters.map((filter, index) => (
+          <div className="form-check" key={index}>
+            <input
+              className="form-check-input"
+              id={`custom-checkbox-${index}`}
+              name={filter?.name}
+              value={filter?.name}
+              type="radio"
+              checked={checkedState[index]}
+              onChange={() => handleOnChange(index)}
+            />
+            <label
+              className="form-check-label"
+              htmlFor={`custom-checkbox-${index}`}
+            >
+              {filter?.name}
+            </label>
+          </div>
+        ))}
     </div>
   )
 }
