@@ -3,7 +3,7 @@ import AppContext from "../context/app-context"
 import ModalContext from "../context/modal-context"
 
 //Components
-import PokemonModal from "../components/pokemon-modal"
+// import PokemonModal from "../components/pokemon-modal"
 import Navbar from "../components/navbar"
 import PokemonCard from "../components/pokemon-card"
 import FilterType from "../components/filter-type"
@@ -21,14 +21,10 @@ const IndexPage = () => {
 
   const fetchPokemons = async () => {
     try {
-      // const data = await getPokemons(next)
-      // setPokemons(prevArray => [...prevArray, ...data.results])
+      const data = await getInitialPokemons()
+      setPokemons(data)
       // setNext(data.next)
-
-      const data = await getInitialPokemons(next)
-      setPokemons(data.results)
-      setNext(data.next)
-      console.log("data", data)
+      // console.log("data", data)
     } catch (err) {
       console.log("err", err)
     }
@@ -39,7 +35,7 @@ const IndexPage = () => {
   }, [])
 
   return (
-    <AppContext.Provider>
+    <>
       <header className="container">
         <Navbar />
         <div className="w-100 border-bottom"></div>
@@ -48,7 +44,7 @@ const IndexPage = () => {
         <div className="row" id="panel">
           <div className="border-end col-12 col-md-3 p-0" id="filters">
             <span>Filters</span>
-            <i class="fas fa-filter"></i>
+            <i className="fas fa-filter"></i>
             <div className="w-100 border-bottom"></div>
             <FilterType />
             <div className="w-100 border-bottom"></div>
@@ -60,32 +56,28 @@ const IndexPage = () => {
             <span className="col-12">
               Choose a pokemon to get more information
             </span>
-            <ModalContext.Provider
+
+            {/* <ModalContext.Provider
               value={{ data: pokemonDataModal, setData: setPokemonDataModal }}
             >
-              <PokemonModal />
-              <div className="d-flex flex-wrap">
-                {pokemons.map(item => {
-                  return (
-                    <PokemonCard
-                      data={item}
-                      key={item?.pokemon_species?.name}
-                    />
-                  )
-                })}
-              </div>
-            </ModalContext.Provider>
-            {max && (
-              <div className="d-flex justify-content-center">
-                <button className="btn-warning" onClick={() => fetchPokemons()}>
-                  Load more
-                </button>
-              </div>
-            )}
+              <PokemonModal /> */}
+            <div className="d-flex flex-wrap">
+              {pokemons.map(item => {
+                return <PokemonCard pokemonData={item} key={item?.idPokemon} />
+              })}
+            </div>
+            {/* </ModalContext.Provider> */}
+            {/* {max && ( */}
+            <div className="d-flex justify-content-center">
+              <button className="btn-warning" onClick={() => fetchPokemons()}>
+                Load more
+              </button>
+            </div>
+            {/* )} */}
           </div>
         </div>
       </div>
-    </AppContext.Provider>
+    </>
   )
 }
 

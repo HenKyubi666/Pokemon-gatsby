@@ -45,30 +45,38 @@ export const fetchPokemonSpecie = id => {
   })
 }
 
-export const getInitialPokemons = (initial = 0) => {
+export const getInitialPokemons = () => {
   return new Promise(async (resolve, reject) => {
     try {
-      let { data } = await axios.get(`${URL}pokedex/national/`)
-      console.log("data-", data)
-      const max =
-        initial + 19 >= data.pokemon_entries.length
-          ? null
-          : data.pokemon_entries.length - initial + 20 > 20
-          ? initial + 20
-          : data.pokemon_entries.length - initial + 20
-      // max = data.pokemon_entries.length
-      if (!max) reject("No hay más pokémons")
-      // Save data.pokemon_entries in localstorage
-      for (let i = initial || 0; i <= max; i++) {
-        data.pokemon_entries[i].data = await fetchPokemonData(
-          data.pokemon_entries[i].entry_number
-        )
-        data.pokemon_entries[i].specie = await fetchPokemonSpecie(
-          Number(data.pokemon_entries[i].entry_number)
-        )
+      localStorage.removeItem("prueba")
+      let dataFormatted = localStorage.getItem("allPokemons")
+
+      if (typeof dataFormatted !== "string") {
+        // get API
+        let { data } = await axios.get(`${URL}pokedex/national/`)
+
+        //create empy list of pokemons
+        const pokemonList = []
+
+        //filter pokemonList for to save in localStorage
+        for (let index = 0; index < data.pokemon_entries.length; index++) {
+          pokemonList.push({
+            idPokemon: data.pokemon_entries[index].entry_number,
+            namePokemon: data.pokemon_entries[index].pokemon_species?.name,
+          })
+        }
+
+        //format pokemonList and save in localStorage
+        localStorage.setItem("allPokemons", JSON.stringify(pokemonList))
+        dataFormatted = JSON.stringify(pokemonList)
       }
-      let res = { results: data.pokemon_entries, next: max }
-      resolve(res)
+      dataFormatted = JSON.parse(dataFormatted)
+      let initialPokemonsList = []
+
+      for (let index = 0; index < 20; index++) {
+        initialPokemonsList.push(dataFormatted[index])
+      }
+      resolve(initialPokemonsList)
     } catch (error) {
       reject(error)
     }
@@ -92,7 +100,7 @@ export const getFilterPokemons = (data = [], filter = []) => {
       let arr = []
       for (let i = 0; i < filter.length; i++) {
         const newFilter = data.filter(pokemon =>
-          pokemon.data.types.filter(type => type.type.name == filter[i])
+          pokemon.data.types.filter(type => type.type.name === filter[i])
         )
         arr.push(newFilter)
       }

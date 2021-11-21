@@ -7,12 +7,12 @@ const FilterGender = () => {
     new Array(filters.length).fill(false)
   )
 
-  const handleOnChange = position => {
-    const updatedCheckedState = checkedState.map((item, index) =>
-      index === position ? !item : item
-    )
-    setCheckedState(updatedCheckedState)
-  }
+  // const handleOnChange = position => {
+  //   const updatedCheckedState = checkedState.map((item, index) =>
+  //     index === position ? !item : item
+  //   )
+  //   setCheckedState(updatedCheckedState)
+  // }
 
   const fetchfilterNames = async () => {
     try {

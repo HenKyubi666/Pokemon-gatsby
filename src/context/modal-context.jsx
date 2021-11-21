@@ -3,7 +3,7 @@ import { createContext } from "react"
 const defaultState = {
   // Main
   data: null,
-  setData: data => {},
+  setData: () => {},
 }
 
 const ModalContext = createContext(defaultState)

@@ -14,7 +14,7 @@ const FilterColors = () => {
             type="checkbox"
             className="btn-check"
             id="color-black"
-            autocomplete="off"
+            autoComplete="off"
           />
           <label className="btn black" htmlFor="color-black"></label>
         </div>
@@ -24,7 +24,7 @@ const FilterColors = () => {
             type="checkbox"
             className="btn-check"
             id="color-blue"
-            autocomplete="off"
+            autoComplete="off"
           />
           <label className="btn blue" htmlFor="color-blue"></label>
         </div>
@@ -34,7 +34,7 @@ const FilterColors = () => {
             type="checkbox"
             className="btn-check"
             id="color-brown"
-            autocomplete="off"
+            autoComplete="off"
           />
           <label className="btn brown" htmlFor="color-brown"></label>
         </div>
@@ -43,7 +43,7 @@ const FilterColors = () => {
             type="checkbox"
             className="btn-check"
             id="color-gray"
-            autocomplete="off"
+            autoComplete="off"
           />
           <label className="btn gray" htmlFor="color-gray"></label>
         </div>
@@ -52,7 +52,7 @@ const FilterColors = () => {
             type="checkbox"
             className="btn-check"
             id="color-green"
-            autocomplete="off"
+            autoComplete="off"
           />
           <label className="btn green" htmlFor="color-green"></label>
         </div>
@@ -61,7 +61,7 @@ const FilterColors = () => {
             type="checkbox"
             className="btn-check"
             id="color-pink"
-            autocomplete="off"
+            autoComplete="off"
           />
           <label className="btn pink" htmlFor="color-pink"></label>
         </div>
@@ -70,7 +70,7 @@ const FilterColors = () => {
             type="checkbox"
             className="btn-check"
             id="color-purple"
-            autocomplete="off"
+            autoComplete="off"
           />
           <label className="btn purple" htmlFor="color-purple"></label>
         </div>
@@ -79,7 +79,7 @@ const FilterColors = () => {
             type="checkbox"
             className="btn-check"
             id="color-red"
-            autocomplete="off"
+            autoComplete="off"
           />
           <label className="btn red" htmlFor="color-red"></label>
         </div>
@@ -88,7 +88,7 @@ const FilterColors = () => {
             type="checkbox"
             className="btn-check"
             id="color-white"
-            autocomplete="off"
+            autoComplete="off"
           />
           <label className="btn white" htmlFor="color-white"></label>
         </div>
@@ -97,7 +97,7 @@ const FilterColors = () => {
             type="checkbox"
             className="btn-check"
             id="color-yellow"
-            autocomplete="off"
+            autoComplete="off"
           />
           <label className="btn yellow" htmlFor="color-yellow"></label>
         </div>

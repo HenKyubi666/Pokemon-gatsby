@@ -12,23 +12,23 @@ const PokemonModal = () => {
   return (
     <>
       <div
-        class="modal fade"
+        className="modal fade"
         id="exampleModal"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content p-2">
-            <div class="d-flex justify-content-end ">
+        <div className="modal-dialog modal-dialog-centered modal-lg">
+          <div className="modal-content p-2">
+            <div className="d-flex justify-content-end ">
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <div className="row">
                 <div className="col-12 col-md-6">
                   <img
