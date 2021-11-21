@@ -49,14 +49,14 @@ export const getInitialPokemons = (initial = 0) => {
   return new Promise(async (resolve, reject) => {
     try {
       let { data } = await axios.get(`${URL}pokedex/national/`)
-      // console.log("data-", data)
-      // const max =
-      //   initial + 19 >= data.pokemon_entries.length
-      //     ? null
-      //     : data.pokemon_entries.length - initial + 20 > 20
-      //     ? initial + 20
-      //     : data.pokemon_entries.length - initial + 20
-      max = data.pokemon_entries.length
+      console.log("data-", data)
+      const max =
+        initial + 19 >= data.pokemon_entries.length
+          ? null
+          : data.pokemon_entries.length - initial + 20 > 20
+          ? initial + 20
+          : data.pokemon_entries.length - initial + 20
+      // max = data.pokemon_entries.length
       if (!max) reject("No hay más pokémons")
       // Save data.pokemon_entries in localstorage
       for (let i = initial || 0; i <= max; i++) {
