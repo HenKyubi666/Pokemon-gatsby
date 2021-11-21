@@ -45,15 +45,12 @@ const FilterGender = () => {
       </div>
       {filters.length > 0 &&
         filters.map((filter, index) => (
-          <div className="form-check" key={index}>
+          <div key={`custom-checkbox-${index}`} className="form-check">
             <input
               className="form-check-input"
+              type="checkbox"
+              value=""
               id={`custom-checkbox-${index}`}
-              name={filter?.name}
-              value={filter?.name}
-              type="radio"
-              checked={checkedState[index]}
-              onChange={() => handleOnChange(index)}
             />
             <label
               className="form-check-label"

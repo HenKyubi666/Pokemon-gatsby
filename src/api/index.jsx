@@ -2,26 +2,26 @@ import axios from "axios"
 
 const URL = `https://pokeapi.co/api/v2/`
 
-export const getPokemons = url => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      let { data } = await axios.get(url || `${URL}ability/?limit=20&offset=0`)
-      for (let i = 0; i < data.results.length; i++) {
-        data.results[i].data = await fetchPokemonData(
-          Number(
-            data.results[i].url
-              .match(/ability([^;]+)/)[1]
-              .replace("/", "")
-              .replace("/", "")
-          )
-        )
-      }
-      resolve(data)
-    } catch (error) {
-      reject(error)
-    }
-  })
-}
+// export const getPokemons = url => {
+//   return new Promise(async (resolve, reject) => {
+//     try {
+//       let { data } = await axios.get(url || `${URL}ability/?limit=20&offset=0`)
+//       for (let i = 0; i < data.results.length; i++) {
+//         data.results[i].data = await fetchPokemonData(
+//           Number(
+//             data.results[i].url
+//               .match(/ability([^;]+)/)[1]
+//               .replace("/", "")
+//               .replace("/", "")
+//           )
+//         )
+//       }
+//       resolve(data)
+//     } catch (error) {
+//       reject(error)
+//     }
+//   })
+// }
 
 export const fetchPokemonData = id => {
   return new Promise(async (resolve, reject) => {
@@ -50,12 +50,13 @@ export const getInitialPokemons = (initial = 0) => {
     try {
       let { data } = await axios.get(`${URL}pokedex/national/`)
       // console.log("data-", data)
-      const max =
-        initial + 20 >= data.pokemon_entries.length
-          ? null
-          : data.pokemon_entries.length - initial + 20 > 20
-          ? initial + 20
-          : data.pokemon_entries.length - initial + 20
+      // const max =
+      //   initial + 19 >= data.pokemon_entries.length
+      //     ? null
+      //     : data.pokemon_entries.length - initial + 20 > 20
+      //     ? initial + 20
+      //     : data.pokemon_entries.length - initial + 20
+      max = data.pokemon_entries.length
       if (!max) reject("No hay más pokémons")
       // Save data.pokemon_entries in localstorage
       for (let i = initial || 0; i <= max; i++) {

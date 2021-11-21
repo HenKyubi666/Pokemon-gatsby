@@ -58,7 +58,11 @@ const PokemonModal = () => {
                     </tr>
                     <tr>
                       <th>Gender:</th>
-                      <td></td>
+                      <td>
+                        {data?.specie?.has_gender_differences
+                          ? "Female"
+                          : "Male - Female"}
+                      </td>
                     </tr>
                     <tr>
                       <th>Habitat:</th>
