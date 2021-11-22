@@ -86,7 +86,10 @@ const IndexPage = () => {
             </span>
 
             <ModalContext.Provider
-              value={{ data: pokemonDataModal, setData: setPokemonDataModal }}
+              value={{
+                pokemonDetailData: pokemonDataModal,
+                setPokemonDetailData: setPokemonDataModal,
+              }}
             >
               <PokemonModal />
               <div className="d-flex flex-wrap">
@@ -100,7 +103,7 @@ const IndexPage = () => {
             <div className="d-flex justify-content-center">
               {next ? (
                 <button
-                  className="btn-warning"
+                  className="btn btn-warning"
                   onClick={() => getMorePokemons()}
                 >
                   Load more

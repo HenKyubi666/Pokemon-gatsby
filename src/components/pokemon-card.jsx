@@ -1,12 +1,27 @@
 import React, { useContext, useEffect, useState } from "react"
 import ModalContext from "../context/modal-context"
+import { fetchPokemonDetails } from "../api"
 // import Lottie from "react-lottie"
 
 //animations
 // import animationThunder from "../animations/thunder.json"
 const PokemonCard = ({ pokemonData }) => {
   const [formatedId, setFormatedId] = useState(null)
-  const { setData } = useContext(ModalContext)
+  const { setPokemonDetailData } = useContext(ModalContext)
+
+  const PokemonDetails = async () => {
+    try {
+      if (pokemonData?.idPokemon) {
+        let pokemonDetailsData = await fetchPokemonDetails(
+          pokemonData.idPokemon
+        )
+        pokemonDetailsData.img = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${formatedId}.png`
+        setPokemonDetailData(pokemonDetailsData)
+      }
+    } catch (err) {
+      console.log("err", err)
+    }
+  }
 
   // const defaultOptions = {
   //   loop: true,
@@ -33,8 +48,7 @@ const PokemonCard = ({ pokemonData }) => {
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
           onClick={() => {
-            console.log("funciona", pokemonData)
-            setData(pokemonData)
+            PokemonDetails()
           }}
         >
           {/* <Lottie options={defaultOptions} height={400} width={400}></Lottie> */}

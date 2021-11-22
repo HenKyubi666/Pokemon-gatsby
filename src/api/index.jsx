@@ -5,14 +5,11 @@ const URL = `https://pokeapi.co/api/v2/`
 export const fetchPokemonDetails = id => {
   return new Promise(async (resolve, reject) => {
     try {
-      console.log("entro a fetch api")
-      let { data } = await axios.get(`${URL}pokemon-species/${id}`)
-      console.log("data1", data)
-      data.description = await axios.get(`${URL}pokemon/${id}`)
-      // const { data } = (data1, data2)
-
-      resolve(data)
+      const description = await axios.get(`${URL}pokemon/${id}`)
+      const species = await axios.get(`${URL}pokemon-species/${id}`)
+      resolve({ data: description?.data, species: species?.data })
     } catch (error) {
+      console.log("err")
       reject(error)
     }
   })

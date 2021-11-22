@@ -2,8 +2,8 @@ import { createContext } from "react"
 
 const defaultState = {
   // Main
-  data: null,
-  setData: () => {},
+  pokemonDetailData: null,
+  setPokemonDetailData: () => {},
 }
 
 const ModalContext = createContext(defaultState)
