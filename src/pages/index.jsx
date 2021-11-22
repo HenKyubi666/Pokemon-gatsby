@@ -14,9 +14,9 @@ import { getInitialPokemons, getNextPokemons } from "../api"
 
 const IndexPage = () => {
   const [pokemons, setPokemons] = useState([])
-  const [morepokemons, setMorePokemons] = useState([])
   const [pokemonDataModal, setPokemonDataModal] = useState(null)
   const [positionInList, setPositionInList] = useState(1)
+  const [nextList, setNextList] = []
 
   const doFilter = () => {
     // Si onchange (OR button)
@@ -43,26 +43,14 @@ const IndexPage = () => {
       console.log("err", err)
     }
   }
-  // const fetchMorePokemons = async () => {
-  //   try {
-  //     const data = await getInitialPokemons()
-  //     // console.log(data)
-  //     setPokemons(data)
-  //     // setNext(data.next)
-  //     // console.log("data", data)
-  //   } catch (err) {
-  //     console.log("err", err)
-  //   }
-  // }
 
   const getMorePokemons = async () => {
     try {
       setPositionInList(positionInList + 1)
-      console.log(positionInList)
       const nextList = await getNextPokemons(positionInList)
-      console.log("response getMorePokemons", nextList)
-      // setPokemons(response?.data)
-      // setMax(response?.max)
+      console.log(nextList.length)
+      // if(nextList.)
+      setPokemons([...pokemons, ...nextList])
     } catch (error) {
       console.log("err getMorePokemons", error)
     }
