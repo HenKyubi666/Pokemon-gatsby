@@ -6,12 +6,12 @@ export const fetchPokemonDetails = id => {
   return new Promise(async (resolve, reject) => {
     try {
       console.log("entro a fetch api")
-      const { data1 } = await axios.get(`${URL}pokemon-species/${id}`)
-      console.log("data1", data1)
-      // const { data2 } = await axios.get(`${URL}pokemon/${id}`)
+      let { data } = await axios.get(`${URL}pokemon-species/${id}`)
+      console.log("data1", data)
+      data.description = await axios.get(`${URL}pokemon/${id}`)
       // const { data } = (data1, data2)
 
-      resolve(data1)
+      resolve(data)
     } catch (error) {
       reject(error)
     }

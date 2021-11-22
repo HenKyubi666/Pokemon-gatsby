@@ -52,14 +52,14 @@ const PokemonModal = () => {
 
   return (
     <>
-      <div
+      {/* <div
         className="modal fade"
         id="exampleModal"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
-      >
-        {/* <div className="modal-dialog modal-dialog-centered modal-lg">
+      > */}
+      {/* <div className="modal-dialog modal-dialog-centered modal-lg">
           <div className="modal-content p-2">
             <div className="d-flex justify-content-end ">
               <button
@@ -139,7 +139,7 @@ const PokemonModal = () => {
             </div>
           </div>
         </div> */}
-      </div>
+      {/* </div> */}
     </>
   )
 }

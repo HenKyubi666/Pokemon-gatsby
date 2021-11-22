@@ -50,7 +50,7 @@ const IndexPage = () => {
       const nextList = await getNextPokemons(positionInList)
       setPokemons([...pokemons, ...nextList])
       if (nextList.length < 20) {
-        setNext((next = false))
+        setNext(false)
         // useEffect(() => {}, [])
       }
     } catch (error) {
@@ -97,16 +97,18 @@ const IndexPage = () => {
                 })}
               </div>
             </ModalContext.Provider>
-            {next && (
-              <div className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center">
+              {next ? (
                 <button
                   className="btn-warning"
                   onClick={() => getMorePokemons()}
                 >
                   Load more
                 </button>
-              </div>
-            )}
+              ) : (
+                <div>No more pokemons...</div>
+              )}
+            </div>
           </div>
         </div>
       </div>
