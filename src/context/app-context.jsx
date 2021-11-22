@@ -7,6 +7,7 @@ const defaultState = {
   // Fetch Init Data
   isFetchingData: false,
   data: [],
+  setData: () => {},
 
   // Fetch Pokemon Data
   isFetchingDataPokemon: false,

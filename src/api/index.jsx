@@ -15,16 +15,6 @@ export const fetchPokemonDetails = id => {
   })
 }
 
-// export const fetchPokemonSpecie = id => {
-//   return new Promise(async (resolve, reject) => {
-//     try {
-//       resolve(data)
-//     } catch (error) {
-//       reject(error)
-//     }
-//   })
-// }
-
 export const getInitialPokemons = () => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -35,33 +25,7 @@ export const getInitialPokemons = () => {
         // get API
         let { data } = await axios.get(`${URL}pokedex/national/`)
 
-        //create empy list of pokemons
-        const pokemonList = []
-
-        //filter pokemonList for to save in localStorage
-
-        let max = Math.round(data.pokemon_entries.length / 20)
-        let count = 0
-        let temporalList = []
-        let endList = data.pokemon_entries.length
-        for (let index = 0; index < endList; index++) {
-          temporalList.push({
-            idPokemon: data.pokemon_entries[index].entry_number,
-            namePokemon: data.pokemon_entries[index].pokemon_species?.name,
-          })
-          if ((index + 1) % 20 === 0) {
-            pokemonList.push(temporalList)
-            temporalList = []
-            count++
-          } else {
-            if (max - count === 1) {
-              if (index + 1 === endList) {
-                pokemonList.push(temporalList)
-                temporalList = []
-              }
-            }
-          }
-        }
+        const pokemonList = await reOrderFormatted(data.pokemon_entries)
 
         // format pokemonList and save in localStorage
         localStorage.setItem("allPokemons", JSON.stringify(pokemonList))
@@ -110,5 +74,38 @@ export const getFilterPokemons = (data = [], filter = []) => {
     } catch (error) {
       reject(error)
     }
+  })
+}
+
+export const reOrderFormatted = (arrayOfObjects = []) => {
+  return new Promise(resolve => {
+    //create empy list of pokemons
+    const pokemonList = []
+
+    //filter pokemonList for to save in localStorage
+
+    let max = Math.round(arrayOfObjects.length / 20)
+    let count = 0
+    let temporalList = []
+    let endList = arrayOfObjects.length
+    for (let index = 0; index < endList; index++) {
+      temporalList.push({
+        idPokemon: arrayOfObjects[index].entry_number,
+        namePokemon: arrayOfObjects[index].pokemon_species?.name,
+      })
+      if ((index + 1) % 20 === 0) {
+        pokemonList.push(temporalList)
+        temporalList = []
+        count++
+      } else {
+        if (max - count === 1) {
+          if (index + 1 === endList) {
+            pokemonList.push(temporalList)
+            temporalList = []
+          }
+        }
+      }
+    }
+    resolve(pokemonList)
   })
 }

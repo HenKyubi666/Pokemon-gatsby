@@ -63,7 +63,12 @@ const IndexPage = () => {
   }, [])
 
   return (
-    <>
+    <AppContext.Provider
+      value={{
+        data: pokemons,
+        setData: setPokemons,
+      }}
+    >
       <header className="container">
         <Navbar />
         <div className="w-100 border-bottom"></div>
@@ -115,7 +120,7 @@ const IndexPage = () => {
           </div>
         </div>
       </div>
-    </>
+    </AppContext.Provider>
   )
 }
 

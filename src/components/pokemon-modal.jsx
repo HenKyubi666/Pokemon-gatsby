@@ -6,7 +6,6 @@ import ModalContext from "../context/modal-context"
 const PokemonModal = () => {
   const { pokemonDetailData } = useContext(ModalContext)
   const { pokemon, setPokemon } = useState([])
-  console.log("en el modal", pokemonDetailData)
   return (
     <>
       <div
