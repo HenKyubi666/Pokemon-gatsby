@@ -2,48 +2,31 @@ import axios from "axios"
 
 const URL = `https://pokeapi.co/api/v2/`
 
-// export const getPokemons = url => {
+export const fetchPokemonDetails = id => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      console.log("entro a fetch api")
+      const { data1 } = await axios.get(`${URL}pokemon-species/${id}`)
+      console.log("data1", data1)
+      // const { data2 } = await axios.get(`${URL}pokemon/${id}`)
+      // const { data } = (data1, data2)
+
+      resolve(data1)
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
+// export const fetchPokemonSpecie = id => {
 //   return new Promise(async (resolve, reject) => {
 //     try {
-//       let { data } = await axios.get(url || `${URL}ability/?limit=20&offset=0`)
-//       for (let i = 0; i < data.results.length; i++) {
-//         data.results[i].data = await fetchPokemonData(
-//           Number(
-//             data.results[i].url
-//               .match(/ability([^;]+)/)[1]
-//               .replace("/", "")
-//               .replace("/", "")
-//           )
-//         )
-//       }
 //       resolve(data)
 //     } catch (error) {
 //       reject(error)
 //     }
 //   })
 // }
-
-export const fetchPokemonData = id => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const { data } = await axios.get(`${URL}pokemon/${id}`)
-      resolve(data)
-    } catch (error) {
-      reject(error)
-    }
-  })
-}
-
-export const fetchPokemonSpecie = id => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const { data } = await axios.get(`${URL}pokemon-species/${id}`)
-      resolve(data)
-    } catch (error) {
-      reject(error)
-    }
-  })
-}
 
 export const getInitialPokemons = () => {
   return new Promise(async (resolve, reject) => {
@@ -59,72 +42,35 @@ export const getInitialPokemons = () => {
         const pokemonList = []
 
         //filter pokemonList for to save in localStorage
-        // for (let index = 0; index < data.pokemon_entries.length; index++) {
-        //   pokemonList.push({
-        //     idPokemon: data.pokemon_entries[index].entry_number,
-        //     namePokemon: data.pokemon_entries[index].pokemon_species?.name,
-        //   })
-        // }
 
         let max = Math.round(data.pokemon_entries.length / 20)
-        // for (let index = 0; index < data.pokemon_entries.length; index++) {
-        //   const element = data.pokemon_entries.length[index]
-        // }
-
         let count = 0
         let temporalList = []
         let endList = data.pokemon_entries.length
         for (let index = 0; index < endList; index++) {
-          // console.log("pokemon", data.pokemon_entries[index])
           temporalList.push({
             idPokemon: data.pokemon_entries[index].entry_number,
             namePokemon: data.pokemon_entries[index].pokemon_species?.name,
           })
-          // console.log("lista temporal", temporalList)
           if ((index + 1) % 20 === 0) {
-            // console.log("entro al if", count)
             pokemonList.push(temporalList)
             temporalList = []
             count++
           } else {
             if (max - count === 1) {
-              console.log("pokemon", data.pokemon_entries[index])
               if (index + 1 === endList) {
                 pokemonList.push(temporalList)
                 temporalList = []
               }
-              // pokemonList[count].push({
-              //   idPokemon: data.pokemon_entries[index].entry_number,
-              //   namePokemon: data.pokemon_entries[index].pokemon_species?.name,
-              // })
-              // console.log(temporalList)
-              // console.log("ultimos", data.pokemon_entries[index])
             }
           }
-          // pokemonList.push({
-          // for (let index = 0; index < data.pokemon_entries.length; index++) {
-          //       const element = array[index]
-
-          //       pokemonList.push({
-          //         idPokemon: data.pokemon_entries[index].entry_number,
-          //         namePokemon: data.pokemon_entries[index].pokemon_species?.name,
-          //       })
-          //     }}
-          //     )
         }
-        // console.log("lista total de pokemons", pokemonList)
 
         // format pokemonList and save in localStorage
         localStorage.setItem("allPokemons", JSON.stringify(pokemonList))
         dataFormatted = JSON.stringify(pokemonList)
       }
       dataFormatted = JSON.parse(dataFormatted)
-      // console.log(dataFormatted)
-      // let initialPokemonsList = []
-
-      // for (let index = 0; index < 20; index++) {
-      //   initialPokemonsList.push(dataFormatted[index])
-      // }
       resolve(dataFormatted[0])
     } catch (error) {
       reject(error)
@@ -138,31 +84,6 @@ export const getNextPokemons = positionInList => {
     let fullList = JSON.parse(localStorage.getItem("allPokemons"))
     //traer la posicion luego devolver en la posicion indicada
     let nextList = fullList[positionInList]
-    // console.log("aca", peguelo)
-    // fullList[positionInList]
-
-    //
-
-    // const maxi = previousList.length + 20
-    // console.log(maxi)
-
-    //
-    // const pokemonList = []
-    // const max =
-    //   previousList.length + 20 >= fullList.length
-    //     ? 0
-    //     : previousList.length < fullList.length
-    //     ? fullList.length - previousList.length
-    //     : fullList.length + 20
-
-    // for (let index = previousList.length; index < max; index++) {
-    //   pokemonList.push({
-    //     idPokemon: fullList[index].entry_number,
-    //     namePokemon: fullList[index].pokemon_species?.name,
-    //   })
-    // }
-
-    // resolve({ data: [...previousList, ...pokemonList], max })
     resolve(nextList)
   })
 }

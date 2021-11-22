@@ -18,7 +18,7 @@ const FilterGender = () => {
     try {
       const data = await getFilterNames()
       setFilters(data.results)
-      console.log("filter", data)
+      // console.log("filter", data)
     } catch (err) {
       console.log("err", err)
     }

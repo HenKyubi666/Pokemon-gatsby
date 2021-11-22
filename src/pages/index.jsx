@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import AppContext from "../context/app-context"
 import ModalContext from "../context/modal-context"
 //Components
-// import PokemonModal from "../components/pokemon-modal"
+import PokemonModal from "../components/pokemon-modal"
 import Navbar from "../components/navbar"
 import PokemonCard from "../components/pokemon-card"
 import FilterType from "../components/filter-type"
@@ -16,7 +16,7 @@ const IndexPage = () => {
   const [pokemons, setPokemons] = useState([])
   const [pokemonDataModal, setPokemonDataModal] = useState(null)
   const [positionInList, setPositionInList] = useState(1)
-  const [nextList, setNextList] = []
+  const [next, setNext] = useState(true)
 
   const doFilter = () => {
     // Si onchange (OR button)
@@ -48,9 +48,11 @@ const IndexPage = () => {
     try {
       setPositionInList(positionInList + 1)
       const nextList = await getNextPokemons(positionInList)
-      console.log(nextList.length)
-      // if(nextList.)
       setPokemons([...pokemons, ...nextList])
+      if (nextList.length < 20) {
+        setNext((next = false))
+        // useEffect(() => {}, [])
+      }
     } catch (error) {
       console.log("err getMorePokemons", error)
     }
@@ -83,23 +85,28 @@ const IndexPage = () => {
               Choose a pokemon to get more information
             </span>
 
-            {/* <ModalContext.Provider
+            <ModalContext.Provider
               value={{ data: pokemonDataModal, setData: setPokemonDataModal }}
             >
-              <PokemonModal /> */}
-            <div className="d-flex flex-wrap">
-              {pokemons.map(item => {
-                return <PokemonCard pokemonData={item} key={item?.idPokemon} />
-              })}
-            </div>
-            {/* </ModalContext.Provider> */}
-            {/* {max !== 0 && ( */}
-            <div className="d-flex justify-content-center">
-              <button className="btn-warning" onClick={() => getMorePokemons()}>
-                Load more
-              </button>
-            </div>
-            {/* )} */}
+              <PokemonModal />
+              <div className="d-flex flex-wrap">
+                {pokemons.map(item => {
+                  return (
+                    <PokemonCard pokemonData={item} key={item?.idPokemon} />
+                  )
+                })}
+              </div>
+            </ModalContext.Provider>
+            {next && (
+              <div className="d-flex justify-content-center">
+                <button
+                  className="btn-warning"
+                  onClick={() => getMorePokemons()}
+                >
+                  Load more
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

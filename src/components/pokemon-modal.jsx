@@ -1,13 +1,54 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import PokemonEvolution from "./pokemon-evolution"
+import PokemonDetails from "../api"
 import ModalContext from "../context/modal-context"
 
 const PokemonModal = () => {
   const { data } = useContext(ModalContext)
+  const { pokemon, setPokemon } = useState([])
+
+  const fetchPokemonDetails = async () => {
+    try {
+      console.log("entro a fetchpokemondetails", data.idPokemon)
+      const detailsData = await PokemonDetails(data.idPokemon)
+      console.log("details", detailsData)
+      setPokemon(detailsData)
+      // setNext(data.next)
+      // console.log("data", data)
+    } catch (err) {
+      console.log("err", err)
+    }
+  }
+
+  // const pokemonDetails = async () => {
+  //   try {
+  //     console.log("entro al details", data)
+  //     const pokemonDetailsData = await fetchPokemonDetails(data.idPokemon)
+  //     console.log(pokemonDetailsData)
+  //     // console.log(data)
+  //     // setPokemons(data)
+  //     // setNext(data.next)
+  //     // console.log("data", data)
+  //   } catch (err) {
+  //     console.log("error en pokemon details", err)
+  //   }
+  // }
+
+  // const [formatedId, setFormatedId] = useState(null)
+  // const
+  // const formatId = (id = "0") =>
+  //   setFormatedId(id.length === 1 ? `00${id}` : id.length === 2 ? `0${id}` : id)
 
   useEffect(() => {
-    console.log(".....data", data)
+    console.log(".....data", data?.idPokemon)
+    fetchPokemonDetails()
+    console.log(".....lel", pokemon)
   })
+  // useEffect(() => {
+  //   if (data.idPokemon == !null) {
+  //     pokemonDetails()
+  //   }
+  // }, [])
 
   return (
     <>
@@ -18,7 +59,7 @@ const PokemonModal = () => {
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-dialog-centered modal-lg">
+        {/* <div className="modal-dialog modal-dialog-centered modal-lg">
           <div className="modal-content p-2">
             <div className="d-flex justify-content-end ">
               <button
@@ -97,7 +138,7 @@ const PokemonModal = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   )
