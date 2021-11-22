@@ -73,7 +73,8 @@ export const getInitialPokemons = () => {
 
         let count = 0
         let temporalList = []
-        for (let index = 0; index < data.pokemon_entries.length; index++) {
+        let endList = data.pokemon_entries.length
+        for (let index = 0; index < endList; index++) {
           // console.log("pokemon", data.pokemon_entries[index])
           temporalList.push({
             idPokemon: data.pokemon_entries[index].entry_number,
@@ -85,17 +86,21 @@ export const getInitialPokemons = () => {
             pokemonList.push(temporalList)
             temporalList = []
             count++
+          } else {
+            if (max - count === 1) {
+              console.log("pokemon", data.pokemon_entries[index])
+              if (index + 1 === endList) {
+                pokemonList.push(temporalList)
+                temporalList = []
+              }
+              // pokemonList[count].push({
+              //   idPokemon: data.pokemon_entries[index].entry_number,
+              //   namePokemon: data.pokemon_entries[index].pokemon_species?.name,
+              // })
+              // console.log(temporalList)
+              // console.log("ultimos", data.pokemon_entries[index])
+            }
           }
-          // else {
-          //   if (max - count === 1) {
-          //     pokemonList[count].push({
-          //       idPokemon: data.pokemon_entries[index].entry_number,
-          //       namePokemon: data.pokemon_entries[index].pokemon_species?.name,
-          //     })
-          //     // console.log(temporalList)
-          //     // console.log("ultimos", data.pokemon_entries[index])
-          //   }
-          // }
           // pokemonList.push({
           // for (let index = 0; index < data.pokemon_entries.length; index++) {
           //       const element = array[index]
@@ -129,14 +134,13 @@ export const getInitialPokemons = () => {
 
 export const getNextPokemons = positionInList => {
   return new Promise(resolve => {
-    console.log("entro al next", positionInList)
+    //traer localStorage
     let fullList = JSON.parse(localStorage.getItem("allPokemons"))
-    // console.log("tal cual viene", fullList)
+    //traer la posicion luego devolver en la posicion indicada
     let nextList = fullList[positionInList]
     // console.log("aca", peguelo)
     // fullList[positionInList]
 
-    //traer localStorage
     //
 
     // const maxi = previousList.length + 20
