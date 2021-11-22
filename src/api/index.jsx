@@ -2,6 +2,11 @@ import axios from "axios"
 
 const URL = `https://pokeapi.co/api/v2/`
 
+/**
+ * This function is to get the information for one pokemon
+ * @param {String | Number} id The id Pokemon
+ * @returns The Pokemon information about description and species
+ */
 export const fetchPokemonDetails = id => {
   return new Promise(async (resolve, reject) => {
     try {

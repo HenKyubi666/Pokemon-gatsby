@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useContext } from "react"
 import { reOrderFormatted } from "../api"
 import AppContext from "../context/app-context"
 
@@ -33,18 +33,6 @@ const SearchBar = () => {
         aria-label="Search"
         onChange={event => search(event.target.value)}
       />
-      {/* {pokemonFullList.map((val, key) => {
-        return <div key={key}>val.</div>
-      })} */}
-
-      {/* {pokemon && (
-        <div>
-          <div>nombre: {pokemon.name}</div>
-          <div>peso: {pokemon.weight} </div>
-          <img src={pokemon.sprites.front_default} alt={pokemon.name}></img>
-          <div></div>
-        </div>
-      )} */}
     </div>
   )
 }

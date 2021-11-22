@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from "react"
 import PokemonEvolution from "./pokemon-evolution"
-import fetchPokemonDetails from "../api"
 import ModalContext from "../context/modal-context"
 
 const PokemonModal = () => {
   const { pokemonDetailData } = useContext(ModalContext)
-  const { pokemon, setPokemon } = useState([])
   return (
     <>
       <div
