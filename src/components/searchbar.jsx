@@ -1,9 +1,10 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { reOrderFormatted } from "../api"
 import AppContext from "../context/app-context"
 
 const SearchBar = () => {
   const { setData } = useContext(AppContext)
+  const [dataListPokemons, setDataListPokemons] = useState([])
 
   const search = async name => {
     const dataFormatted = JSON.parse(localStorage.getItem("allPokemons"))
@@ -15,17 +16,16 @@ const SearchBar = () => {
         listOrder.push(pokemonData)
       }
     }
+    setDataListPokemons(listOrder)
     const searchList = listOrder.filter(
       item =>
         item.idPokemon.toString().includes(Number(name)) ||
         item.namePokemon.includes(name)
     )
-    //
     let pokemonList = await reOrderFormatted(searchList)
     pokemonList =
       pokemonList.length < searchList.length ? searchList : pokemonList
     const res = name ? pokemonList : dataFormatted[0]
-    //
     setData(res)
   }
 
@@ -38,7 +38,13 @@ const SearchBar = () => {
         placeholder="Search"
         aria-label="Search"
         onChange={event => search(event.target.value)}
+        list="dataListPokemons"
       />
+      <datalist id="dataListPokemons">
+        {dataListPokemons.map((item, index) => {
+          return <option value={item.namePokemon} />
+        })}
+      </datalist>
     </div>
   )
 }
