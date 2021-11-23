@@ -59,6 +59,10 @@ export const getNextPokemons = positionInList => {
   })
 }
 
+/**
+ * get the object in on the type endpoint
+ * @returns list of pokemons for type
+ */
 export const getFilterNames = () => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -70,6 +74,10 @@ export const getFilterNames = () => {
   })
 }
 
+/**
+ * get the object in on the color endpoint
+ * @returns list of pokemons for color
+ */
 export const getColorNames = () => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -81,6 +89,10 @@ export const getColorNames = () => {
   })
 }
 
+/**
+ * get the object in on the gender endpoint
+ * @returns list of pokemons for gender
+ */
 export const getGenderNames = () => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -92,6 +104,12 @@ export const getGenderNames = () => {
   })
 }
 
+/**
+ * get two lists data and filter, data is filtered with the filter information
+ * @param {Arrray} data
+ * @param {Array} filter
+ * @returns new list of pokemons filtered
+ */
 export const getFilterPokemons = (data = [], filter = []) => {
   return new Promise(async (resolve, reject) => {
     try {
