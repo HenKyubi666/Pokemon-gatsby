@@ -4,6 +4,7 @@ import AppContext from "../context/app-context"
 
 const SearchBar = () => {
   const { setData } = useContext(AppContext)
+
   const search = async name => {
     const dataFormatted = JSON.parse(localStorage.getItem("allPokemons"))
     let listOrder = []
@@ -15,11 +16,16 @@ const SearchBar = () => {
       }
     }
     const searchList = listOrder.filter(
-      item => item.idPokemon == Number(name) || item.namePokemon.includes(name)
+      item =>
+        item.idPokemon.toString().includes(Number(name)) ||
+        item.namePokemon.includes(name)
     )
+    //
     let pokemonList = await reOrderFormatted(searchList)
-    pokemonList = pokemonList.length < 20 ? searchList : pokemonList
+    pokemonList =
+      pokemonList.length < searchList.length ? searchList : pokemonList
     const res = name ? pokemonList : dataFormatted[0]
+    //
     setData(res)
   }
 

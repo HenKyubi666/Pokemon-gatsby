@@ -12,7 +12,10 @@ export const fetchPokemonDetails = id => {
     try {
       const description = await axios.get(`${URL}pokemon/${id}`)
       const species = await axios.get(`${URL}pokemon-species/${id}`)
-      resolve({ data: description?.data, species: species?.data })
+      resolve({
+        data: description?.data,
+        species: species?.data,
+      })
     } catch (error) {
       console.log("err")
       reject(error)
@@ -20,19 +23,18 @@ export const fetchPokemonDetails = id => {
   })
 }
 
+/**
+ * This function consults the API, formats the query in an object (pokemon list),
+ * stores it in LocalStorage and returns the first position of the object
+ * @returns first list of 20 pokemon
+ */
 export const getInitialPokemons = () => {
   return new Promise(async (resolve, reject) => {
     try {
-      localStorage.clear()
       let dataFormatted = localStorage.getItem("allPokemons")
-
       if (typeof dataFormatted !== "string") {
-        // get API
         let { data } = await axios.get(`${URL}pokedex/national/`)
-
         const pokemonList = await reOrderFormatted(data.pokemon_entries)
-
-        // format pokemonList and save in localStorage
         localStorage.setItem("allPokemons", JSON.stringify(pokemonList))
         dataFormatted = JSON.stringify(pokemonList)
       }
@@ -44,11 +46,14 @@ export const getInitialPokemons = () => {
   })
 }
 
+/**
+ * gets the information in LocalStorage, formats it and returns the following list of pokemon
+ * @param {Array} positionInList Actual position of the list
+ * @returns next list of pokemon
+ */
 export const getNextPokemons = positionInList => {
   return new Promise(resolve => {
-    //traer localStorage
     let fullList = JSON.parse(localStorage.getItem("allPokemons"))
-    //traer la posicion luego devolver en la posicion indicada
     let nextList = fullList[positionInList]
     resolve(nextList)
   })
@@ -82,6 +87,11 @@ export const getFilterPokemons = (data = [], filter = []) => {
   })
 }
 
+/**
+ * reorganize the Array of Objects into a unicap Array
+ * @param {Array} arrayOfObjects Array of Objects
+ * @returns Array of Object Pokemons
+ */
 export const reOrderFormatted = (arrayOfObjects = []) => {
   return new Promise(resolve => {
     //create empy list of pokemons

@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext } from "react"
 import PokemonEvolution from "./pokemon-evolution"
 import ModalContext from "../context/modal-context"
 
 const PokemonModal = () => {
   const { pokemonDetailData } = useContext(ModalContext)
+
   return (
     <>
       <div
@@ -91,7 +92,7 @@ const PokemonModal = () => {
                 </div>
                 <div className="col-12">
                   <h3>Evolution</h3>
-                  <PokemonEvolution />
+                  <PokemonEvolution></PokemonEvolution>
                   <p>This pokemon does not evolve</p>
                 </div>
               </div>

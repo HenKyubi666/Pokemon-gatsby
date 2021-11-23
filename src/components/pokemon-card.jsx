@@ -24,8 +24,8 @@ const PokemonCard = ({ pokemonData }) => {
     setFormatedId(id.length === 1 ? `00${id}` : id.length === 2 ? `0${id}` : id)
 
   useEffect(() => {
-    if (pokemonData.idPokemon) formatId(JSON.stringify(pokemonData.idPokemon))
-  }, [])
+    if (pokemonData?.idPokemon) formatId(JSON.stringify(pokemonData?.idPokemon))
+  }, [pokemonData])
 
   return (
     <div className="h-100 col-12 col-md-4 p-2">
