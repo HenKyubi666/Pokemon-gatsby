@@ -1,8 +1,15 @@
 import React from "react"
+import { useForm } from "react-hook-form"
 
 const FilterColors = () => {
+  const onSubmit = data => {
+    alert(JSON.stringify(data))
+  }
+
+  const { handleSubmit } = useForm()
+
   return (
-    <div className="color-filter">
+    <form className="color-filter" onChangeCapture={handleSubmit(onSubmit)}>
       <span>Color:</span>
       <div
         className="btn-group colors-container"
@@ -11,6 +18,7 @@ const FilterColors = () => {
       >
         <div>
           <input
+            value={true}
             type="checkbox"
             className="btn-check"
             id="color-black"
@@ -21,6 +29,7 @@ const FilterColors = () => {
 
         <div>
           <input
+            value={true}
             type="checkbox"
             className="btn-check"
             id="color-blue"
@@ -31,6 +40,7 @@ const FilterColors = () => {
 
         <div>
           <input
+            value={true}
             type="checkbox"
             className="btn-check"
             id="color-brown"
@@ -40,6 +50,7 @@ const FilterColors = () => {
         </div>
         <div>
           <input
+            value={true}
             type="checkbox"
             className="btn-check"
             id="color-gray"
@@ -49,6 +60,7 @@ const FilterColors = () => {
         </div>
         <div>
           <input
+            value={true}
             type="checkbox"
             className="btn-check"
             id="color-green"
@@ -58,6 +70,7 @@ const FilterColors = () => {
         </div>
         <div>
           <input
+            value={true}
             type="checkbox"
             className="btn-check"
             id="color-pink"
@@ -67,6 +80,7 @@ const FilterColors = () => {
         </div>
         <div>
           <input
+            value={true}
             type="checkbox"
             className="btn-check"
             id="color-purple"
@@ -76,6 +90,7 @@ const FilterColors = () => {
         </div>
         <div>
           <input
+            value={true}
             type="checkbox"
             className="btn-check"
             id="color-red"
@@ -85,6 +100,7 @@ const FilterColors = () => {
         </div>
         <div>
           <input
+            value={true}
             type="checkbox"
             className="btn-check"
             id="color-white"
@@ -94,6 +110,7 @@ const FilterColors = () => {
         </div>
         <div>
           <input
+            value={true}
             type="checkbox"
             className="btn-check"
             id="color-yellow"
@@ -115,7 +132,7 @@ const FilterColors = () => {
         <div className="white"></div>
         <div className="yellow"></div>
       </div> */}
-    </div>
+    </form>
   )
 }
 
