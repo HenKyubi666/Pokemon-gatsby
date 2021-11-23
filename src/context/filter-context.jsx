@@ -2,12 +2,15 @@ import { createContext } from "react"
 
 const defaultState = {
   // Main
-  filterType: [], // multiselect
-  setFilterType: [], // multiselect
-  filterColors: [], // multiselect
-  setFilterColors: [], // multiselect
-  filterGender: null, // string
-  setFilterGender: null, // string
+  filterType: [],
+  setFilterType: () => {},
+  filterColors: [],
+  setFilterColors: () => {},
+  filterGender: null,
+  setFilterGender: () => {},
+
+  // Action global
+  doFilter: () => {},
 }
 
 const FilterContext = createContext(defaultState)

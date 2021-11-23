@@ -1,138 +1,86 @@
-import React from "react"
-import { useForm } from "react-hook-form"
+import React, { useState, useEffect, useContext } from "react"
+import { getColorNames, getPokemonsInColors } from "../api"
+import classNames from "classnames"
+import FilterContext from "../context/filter-context"
 
 const FilterColors = () => {
-  const onSubmit = data => {
-    alert(JSON.stringify(data))
+  const [color, setColor] = useState([])
+  const [colorSelected, setColorSelected] = useState([])
+  const { setFilterColors } = useContext(FilterContext)
+
+  const fetchFilterNames = async () => {
+    try {
+      const data = await getColorNames()
+      setColor(data.results)
+    } catch (err) {
+      console.log("err", err)
+    }
   }
 
-  const { handleSubmit } = useForm()
+  const getPokemonNames = async (types = []) => {
+    let newArrayPokemonNames = []
+    for (let i = 0; i < types.length; i++) {
+      const pokemons = await getPokemonsInColors(types[i])
+      const pokemonNames = []
+      for (let i = 0; i < pokemons.pokemon_species.length; i++) {
+        pokemonNames.push(pokemons.pokemon_species[i].name)
+      }
+      newArrayPokemonNames.push(...pokemonNames)
+    }
+    newArrayPokemonNames = newArrayPokemonNames.filter(
+      (item, index) => newArrayPokemonNames.indexOf(item) === index
+    )
+    return newArrayPokemonNames
+  }
+
+  const onChange = async id => {
+    let selected = colorSelected
+    let find = selected.indexOf(id)
+    if (find > -1) {
+      selected.splice(find, 1)
+    } else {
+      selected.push(id)
+    }
+    setColorSelected(selected)
+    const selectedNames = await getPokemonNames(selected)
+    setFilterColors(selectedNames)
+  }
+
+  useEffect(() => {
+    fetchFilterNames()
+  }, [])
 
   return (
-    <form className="color-filter" onChangeCapture={handleSubmit(onSubmit)}>
+    <div className="color-filter">
       <span>Color:</span>
       <div
         className="btn-group colors-container"
         role="group"
         aria-label="Basic checkbox toggle button group"
       >
-        <div>
-          <input
-            value={true}
-            type="checkbox"
-            className="btn-check"
-            id="color-black"
-            autoComplete="off"
-          />
-          <label className="btn black" htmlFor="color-black"></label>
-        </div>
-
-        <div>
-          <input
-            value={true}
-            type="checkbox"
-            className="btn-check"
-            id="color-blue"
-            autoComplete="off"
-          />
-          <label className="btn blue" htmlFor="color-blue"></label>
-        </div>
-
-        <div>
-          <input
-            value={true}
-            type="checkbox"
-            className="btn-check"
-            id="color-brown"
-            autoComplete="off"
-          />
-          <label className="btn brown" htmlFor="color-brown"></label>
-        </div>
-        <div>
-          <input
-            value={true}
-            type="checkbox"
-            className="btn-check"
-            id="color-gray"
-            autoComplete="off"
-          />
-          <label className="btn gray" htmlFor="color-gray"></label>
-        </div>
-        <div>
-          <input
-            value={true}
-            type="checkbox"
-            className="btn-check"
-            id="color-green"
-            autoComplete="off"
-          />
-          <label className="btn green" htmlFor="color-green"></label>
-        </div>
-        <div>
-          <input
-            value={true}
-            type="checkbox"
-            className="btn-check"
-            id="color-pink"
-            autoComplete="off"
-          />
-          <label className="btn pink" htmlFor="color-pink"></label>
-        </div>
-        <div>
-          <input
-            value={true}
-            type="checkbox"
-            className="btn-check"
-            id="color-purple"
-            autoComplete="off"
-          />
-          <label className="btn purple" htmlFor="color-purple"></label>
-        </div>
-        <div>
-          <input
-            value={true}
-            type="checkbox"
-            className="btn-check"
-            id="color-red"
-            autoComplete="off"
-          />
-          <label className="btn red" htmlFor="color-red"></label>
-        </div>
-        <div>
-          <input
-            value={true}
-            type="checkbox"
-            className="btn-check"
-            id="color-white"
-            autoComplete="off"
-          />
-          <label className="btn white" htmlFor="color-white"></label>
-        </div>
-        <div>
-          <input
-            value={true}
-            type="checkbox"
-            className="btn-check"
-            id="color-yellow"
-            autoComplete="off"
-          />
-          <label className="btn yellow" htmlFor="color-yellow"></label>
-        </div>
+        {color.length > 0 &&
+          color.map((filter, index) => (
+            <div>
+              <input
+                value={colorSelected.includes(filter?.name)}
+                onChange={() => onChange(filter?.name)}
+                type="checkbox"
+                className="btn-check"
+                id={`color-${filter?.name}`}
+                autoComplete="off"
+                aria-label={`color-${filter?.name}`}
+              />
+              <label
+                className={classNames(`btn ${filter?.name}`, {
+                  "btn-selected-in-color": colorSelected.includes(filter?.name),
+                })}
+                htmlFor={`color-${filter?.name}`}
+                aria-labelledby={`color-${filter?.name}`}
+              ></label>
+            </div>
+          ))}
       </div>
-
-      {/* <div className="colors-container">
-        <div className="black"></div>
-        <div className="blue"></div>
-        <div className="brown"></div>
-        <div className="gray"></div>
-        <div className="green"></div>
-        <div className="pink"></div>
-        <div className="purple"></div>
-        <div className="red"></div>
-        <div className="white"></div>
-        <div className="yellow"></div>
-      </div> */}
-    </form>
+    </div>
   )
 }
 

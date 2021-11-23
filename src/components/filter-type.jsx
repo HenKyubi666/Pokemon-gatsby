@@ -1,56 +1,64 @@
-import React, { useState, useEffect } from "react"
-import { getFilterNames } from "../api"
+import React, { useState, useEffect, useContext } from "react"
+import { getFilterNames, getPokemonsInType, removeRepeat } from "../api"
+import FilterContext from "../context/filter-context"
 
 const FilterType = () => {
   const [filters, setFilters] = useState([])
-  const [checkedState, setCheckedState] = useState(
-    new Array(filters.length).fill(false)
-  )
+  const [filtersSelected, setFiltersSelected] = useState([])
+  const { setFilterType } = useContext(FilterContext)
 
-  // const handleOnChange = position => {
-  //   const updatedCheckedState = checkedState.map((item, index) =>
-  //     index === position ? !item : item
-  //   )
-  //   setCheckedState(updatedCheckedState)
-  // }
-
-  const fetchfilterNames = async () => {
+  const fetchFilterNames = async () => {
     try {
       const data = await getFilterNames()
       setFilters(data.results)
-      // console.log("filter", data)
     } catch (err) {
       console.log("err", err)
     }
   }
 
+  const getPokemonNames = async (types = []) => {
+    let newArrayPokemonNames = []
+    for (let i = 0; i < types.length; i++) {
+      const pokemons = await getPokemonsInType(types[i])
+      const pokemonNames = []
+      for (let i = 0; i < pokemons.pokemon.length; i++) {
+        pokemonNames.push(pokemons.pokemon[i].pokemon.name)
+      }
+      newArrayPokemonNames.push(...pokemonNames)
+    }
+    newArrayPokemonNames = removeRepeat(newArrayPokemonNames)
+    return newArrayPokemonNames
+  }
+
+  const onChange = async id => {
+    let selected = filtersSelected
+    let find = selected.indexOf(id)
+    if (find > -1) {
+      selected.splice(find, 1)
+    } else {
+      selected.push(id)
+    }
+    setFiltersSelected(selected)
+    const selectedNames = await getPokemonNames(selected)
+    setFilterType(selectedNames)
+  }
+
   useEffect(() => {
-    fetchfilterNames()
+    fetchFilterNames()
   }, [])
 
   return (
-    <div className="gender-filter">
-      <span>Gender:</span>
-      <div className="form-check">
-        <input
-          className="form-check-input"
-          type="radio"
-          name="gender-filter"
-          id="all"
-          // checked="checked"
-        />
-        <label className="form-check-label" htmlFor="all">
-          All
-        </label>
-      </div>
+    <div className="gender-filter row mx-3">
+      <span className="p-0">Type:</span>
       {filters.length > 0 &&
         filters.map((filter, index) => (
-          <div key={`custom-checkbox-${index}`} className="form-check">
+          <div key={`custom-checkbox-${index}`} className="form-check col-6">
             <input
+              id={`custom-checkbox-${index}`}
               className="form-check-input"
               type="checkbox"
-              value=""
-              id={`custom-checkbox-${index}`}
+              value={filtersSelected.includes(filter?.name)}
+              onChange={() => onChange(filter?.name)}
             />
             <label
               className="form-check-label"

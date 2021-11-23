@@ -42,7 +42,7 @@ const SearchBar = () => {
       />
       <datalist id="dataListPokemons">
         {dataListPokemons.map((item, index) => {
-          return <option value={item.namePokemon} />
+          return <option aria-labelledby="Search" value={item?.namePokemon} />
         })}
       </datalist>
     </div>

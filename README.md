@@ -1,54 +1,88 @@
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
-  <a href="https://www.gatsbyjs.com">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
+  <a href="https://henkyubi666.github.io/Pokemon-gatsby/">
+    <img alt="Pokemon logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/2560px-International_Pok%C3%A9mon_logo.svg.png" width="50%" />
   </a>
 </p>
-<h1 align="center">
+# Pokemon gatsby
+
+Desarrollo una interfaz web (SPA) en la cual pueda buscar, filtrar y ampliar información sobre diferentes Pokemon.
+
+<!-- <h1 align="center">
   Gatsby's default starter
-</h1>
+</h1> -->
 
-Kick off your project with this default boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+## Comenzando 🚀
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.com/docs/gatsby-starters/)._
+_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
 
-## 🚀 Quick start
+### Pre-requisitos 📋
 
-1.  **Create a Gatsby site.**
+_Para poder ver proyecto en marcha desde tu repositorio local debes tener instalado Node.js y npm_
 
-    Use the Gatsby CLI ([install instructions](https://www.gatsbyjs.com/docs/tutorial/part-0/#gatsby-cli)) to create a new site, specifying the default starter.
+_Descarga e instala Node.js desde_
 
-    ```shell
-    # create a new Gatsby site using the default starter
-    gatsby new my-default-starter https://github.com/gatsbyjs/gatsby-starter-default
-    ```
+```
+https://nodejs.org/es/download/
+```
 
-1.  **Start developing.**
+_Una vez finalizado el proceso de instalación, podemos comprobar fácilmente si se nos ha instalado correctamente. Para ello, vamos al intérprete de comandos de nuestro ordenador (en Windows, por ejemplo, escribir “cmd” en la barra de búsqueda y abrir la aplicación de “Símbolo del sistema”)._
 
-    Navigate into your new site’s directory and start it up.
+_En la ventana de comandos, escribir node -v y pulsar la tecla Enter. Nos debería aparecer la versión que tenemos instalada de Node.js_
 
-    ```shell
-    cd my-default-starter/
-    gatsby develop
-    ```
+```
+node -v
+```
 
-1.  **Open the source code and start editing!**
+_Ten en cuenta que la version de node debe ser v14.17.5 o superior_
 
-    Your site is now running at `http://localhost:8000`!
+_Por defecto NodeJs instala npm, para comprobar, ejecuta:_
 
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby Tutorial](https://www.gatsbyjs.com/docs/tutorial/part-4/#use-graphiql-to-explore-the-data-layer-and-write-graphql-queries)._
+```
+npm -v
+```
 
-    Open the `my-default-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+_La version que se usó para este proyecto es la 6.14.14_
 
-## 🚀 Quick start (Gatsby Cloud)
+### Instalación 🔧
 
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
+_Paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
 
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-default)
+_Descargar [repositorio](https://github.com/HenKyubi666/Pokemon-gatsby)_
 
-## 🧐 What's inside?
+```
+https://github.com/HenKyubi666/Pokemon-gatsby
+```
 
-A quick look at the top-level files and directories you'll see in a Gatsby project.
+_Accede a la carpeta del repositorio descargado, ábre la consola, ubicandote siempre en el repositorio local_
+
+_Similar a lo siguiente_
+
+```
+C:\Users\{nombre de usuario}\Pokemon-gatsby
+```
+
+_Instalar dependencias_
+
+```
+npm i
+```
+
+_Correr servidor_
+
+```
+npm start
+```
+
+_Una vez el servidor se este ejecutando podras ingresar al [local host](http://localhost:8000/) y ver el proyecto en marcha_
+
+## Despliegue 📦
+
+_El proyecto esta en despliegue continuo desde la rama master, puede visualizarse en https://henkyubi666.github.io/Pokemon-gatsby/_
+
+## 🧐 ¿Qué hay adentro?
+
+Un vistazo rápido a los archivos y directorios de nivel superior que verá en el proyecto.
 
     .
     ├── node_modules
@@ -64,42 +98,53 @@ A quick look at the top-level files and directories you'll see in a Gatsby proje
     ├── package.json
     └── README.md
 
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
+1.  **`/node_modules`**: Este directorio contiene todos los módulos de código de los que depende su proyecto (paquetes npm) se instalan automáticamente Este directorio contiene todos los módulos de código de los que depende su proyecto (paquetes npm) se instalan automáticamente.
 
-2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
+2.  **`/src`**: Este directorio contendrá todo el código relacionado con lo que verá en el front-end de su sitio (lo que ve en el navegador), como el encabezado de su sitio o una plantilla de página. `src` es una convención para el" código fuente ".
 
-3.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+3.  **`.gitignore`**: Este archivo le dice a git para qué archivos no debe rastrear / no mantener un historial de versiones.
 
-4.  **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
+4.  **`.prettierrc`**: Este es un archivo de configuración para [Prettier] (https://prettier.io/). Prettier es una herramienta que ayuda a mantener la coherencia en el formato de su código.
 
-5.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-browser/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
+5.  **`gatsby-browser.js`**: Este archivo es donde Gatsby espera encontrar cualquier uso de las [API del navegador Gatsby] (https://www.gatsbyjs.com/docs/reference/config-files/gatsby-browser/) (si corresponde). Estos permiten la personalización / extensión de la configuración predeterminada de Gatsby que afecta al navegador.
 
-6.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/) for more detail).
+6.  **`gatsby-config.js`**: Este es el archivo de configuración principal para un sitio de Gatsby. Aquí es donde puede especificar información sobre su sitio (metadatos) como el título y la descripción del sitio, qué complementos de Gatsby le gustaría incluir, etc. (Consulte los [documentos de configuración] (https://www.gatsbyjs.com / docs / reference / config-files / gatsby-config /) para más detalles).
 
-7.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
+7.  **`gatsby-node.js`**: Este archivo es donde Gatsby espera encontrar cualquier uso de las [API de nodo de Gatsby] (https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/) (si corresponde). Estos permiten la personalización / extensión de la configuración predeterminada de Gatsby que afecta partes del proceso de construcción del sitio.
 
-8.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-ssr/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
+8.  **`gatsby-ssr.js`**: Este archivo es donde Gatsby espera encontrar cualquier uso de las [API de renderización del lado del servidor de Gatsby] (https://www.gatsbyjs.com/docs/reference/config-files/gatsby-ssr/) (si corresponde). Estos permiten la personalización de la configuración predeterminada de Gatsby que afecta a la representación del lado del servidor.
 
-9.  **`LICENSE`**: This Gatsby starter is licensed under the 0BSD license. This means that you can see this file as a placeholder and replace it with your own license.
+9.  **`LICENSE`**: Este arrancador de Gatsby tiene la licencia 0BSD. Esto significa que puede ver este archivo como un marcador de posición y reemplazarlo con su propia licencia.
 
-10. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
+10. **`package-lock.json`** (Consulte `package.json` a continuación, primero). Este es un archivo generado automáticamente basado en las versiones exactas de sus dependencias npm que se instalaron para su proyecto. ** (No cambiará este archivo directamente). **
 
-11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
+11. **`package.json`**: Un archivo de manifiesto para proyectos de Node.js, que incluye cosas como metadatos (nombre del proyecto, autor, etc.). Este manifiesto es cómo npm sabe qué paquetes instalar para su proyecto.
 
-12. **`README.md`**: A text file containing useful reference information about your project.
+12. **`README.md`**:
+    Un archivo de texto que contiene información de referencia útil sobre su proyecto.
 
-## 🎓 Learning Gatsby
+## Construido con 🛠️
 
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.com/). Here are some places to start:
+_Menciona las herramientas que utilizaste para crear tu proyecto_
 
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.com/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
+- [Gatsby + React JSX](https://www.gatsbyjs.com/) - El framework web utilizado
+- [Bootstrap](https://getbootstrap.com/) - Biblioteca de estilos y diseño responsive
+- [NPM](https://www.npmjs.com/) - Manejador de dependencias
+- [React-context](https://es.reactjs.org/docs/context.html) - Manejo de estado y contexto de la aplicación
+- [Axios](https://www.npmjs.com/package/axios) - Manejo de peticiones HTTP
 
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.com/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
+## Versionado 📌
 
-## 💫 Deploy
+Usamos [Git](https://git-scm.com/) para el versionado. Para todas las versiones disponibles, mira los [commits en este repositorio](https://github.com/HenKyubi666/Pokemon-gatsby/commits/master).
 
-[Build, Deploy, and Host On The Only Cloud Built For Gatsby](https://www.gatsbyjs.com/products/cloud/)
+## Autores ✒️
 
-Gatsby Cloud is an end-to-end cloud platform specifically built for the Gatsby framework that combines a modern developer experience with an optimized, global edge network.
+- **John Henrry Niño** - _Trabajo Inicial_ - [HenKyubi666](https://github.com/henkyubi666)
 
-<!-- AUTO-GENERATED-CONTENT:END -->
+## Licencia 📄
+
+Este proyecto es OpenSource
+
+---
+
+⌨️ con ❤️ por [HenKyubi666](https://github.com/henkyubi666) 😊

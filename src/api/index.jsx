@@ -70,6 +70,28 @@ export const getFilterNames = () => {
   })
 }
 
+export const getColorNames = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const { data } = await axios.get(`${URL}pokemon-color/`)
+      resolve(data)
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
+export const getGenderNames = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const { data } = await axios.get(`${URL}gender/`)
+      resolve(data)
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
 export const getFilterPokemons = (data = [], filter = []) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -122,5 +144,77 @@ export const reOrderFormatted = (arrayOfObjects = []) => {
       }
     }
     resolve(pokemonList)
+  })
+}
+
+export const getPokemonsInType = id => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const { data } = await axios.get(`${URL}type/${id}`)
+      resolve(data)
+    } catch (err) {
+      reject(err)
+    }
+  })
+}
+
+export const getPokemonsInColors = id => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const { data } = await axios.get(`${URL}pokemon-color/${id}`)
+      resolve(data)
+    } catch (err) {
+      reject(err)
+    }
+  })
+}
+
+export const getPokemonsInGender = id => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const { data } = await axios.get(`${URL}gender/${id}`)
+      resolve(data)
+    } catch (err) {
+      reject(err)
+    }
+  })
+}
+
+export const removeRepeat = (array = []) => {
+  return array.filter((item, index) => array.indexOf(item) === index)
+}
+
+export const doFilter = (filterType, filterColors, filterGender) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let pokemonList = []
+      if (filterType.length > 0) pokemonList.push(...filterType)
+      if (filterColors.length > 0) pokemonList.push(...filterColors)
+      if (filterGender.length > 0) pokemonList.push(...filterGender)
+      pokemonList = removeRepeat(pokemonList)
+      const dataFormatted = JSON.parse(localStorage.getItem("allPokemons"))
+      let listOrder = []
+      for (let index = 0; index < dataFormatted.length; index++) {
+        const element = dataFormatted[index]
+        for (let index = 0; index < element.length; index++) {
+          const pokemonData = element[index]
+          listOrder.push(pokemonData)
+        }
+      }
+      let searchList = []
+      for (let i = 0; i < pokemonList.length; i++) {
+        const pokemonsFiltred = listOrder.filter(item =>
+          item.namePokemon.includes(pokemonList[i])
+        )
+        if (pokemonsFiltred.length > 0) searchList.push(...pokemonsFiltred)
+      }
+      searchList = removeRepeat(searchList)
+      pokemonList = await reOrderFormatted(searchList)
+      pokemonList =
+        pokemonList.length < searchList.length ? searchList : pokemonList
+      resolve(pokemonList)
+    } catch (err) {
+      reject(err)
+    }
   })
 }

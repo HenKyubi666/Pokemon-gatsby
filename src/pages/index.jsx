@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import AppContext from "../context/app-context"
 import ModalContext from "../context/modal-context"
 import FilterContext from "../context/filter-context"
@@ -12,7 +12,12 @@ import FilterColors from "../components/filter-colors"
 import FilterGender from "../components/filter-gender"
 
 //API
-import { getInitialPokemons, getNextPokemons } from "../api"
+import {
+  getInitialPokemons,
+  getNextPokemons,
+  reOrderFormatted,
+  doFilter,
+} from "../api"
 
 const IndexPage = () => {
   const [pokemons, setPokemons] = useState([])
@@ -23,14 +28,14 @@ const IndexPage = () => {
   // States for Filters
   const [filterType, setFilterType] = useState([])
   const [filterColors, setFilterColors] = useState([])
-  const [filterGender, setFilterGender] = useState(null)
+  const [filterGender, setFilterGender] = useState([])
 
   const fetchInitialPokemons = async () => {
     try {
       const data = await getInitialPokemons()
       setPokemons(data)
     } catch (err) {
-      console.log("err", err)
+      console.log("err fetchInitialPokemons", err)
     }
   }
 
@@ -45,9 +50,20 @@ const IndexPage = () => {
     }
   }
 
+  const filterAndSetData = async () => {
+    try {
+      const data = await doFilter(filterType, filterColors, filterGender)
+      setPokemons(data)
+    } catch (err) {
+      console.log("err fetchInitialPokemons", err)
+    }
+  }
+
   useEffect(() => {
-    fetchInitialPokemons()
-  }, [])
+    filterType.length > 0 || filterColors.length > 0 || filterGender.length > 0
+      ? filterAndSetData()
+      : fetchInitialPokemons()
+  }, [filterType, filterColors, filterGender])
 
   return (
     <AppContext.Provider
@@ -71,6 +87,7 @@ const IndexPage = () => {
                 setFilterColors,
                 filterGender,
                 setFilterGender,
+                doFilter,
               }}
             >
               <span>Filters</span>
@@ -81,6 +98,12 @@ const IndexPage = () => {
               <FilterColors />
               <div className="w-100 border-bottom"></div>
               <FilterGender />
+              <button
+                className="btn btn-danger btn-flotant"
+                onClick={() => fetchInitialPokemons()}
+              >
+                Reset
+              </button>
             </FilterContext.Provider>
           </div>
           <div className="col-12 col-md-9" id="rigth-panel">
@@ -96,14 +119,23 @@ const IndexPage = () => {
             >
               <PokemonModal />
               <div className="d-flex flex-wrap">
-                {pokemons.map(item => {
-                  return (
-                    <PokemonCard pokemonData={item} key={item?.idPokemon} />
-                  )
-                })}
+                {pokemons.length !== 0 ? (
+                  <>
+                    {pokemons.map(item => {
+                      return (
+                        <PokemonCard pokemonData={item} key={item?.idPokemon} />
+                      )
+                    })}
+                  </>
+                ) : (
+                  <div>No items found</div>
+                )}
               </div>
             </ModalContext.Provider>
-            <div className="d-flex justify-content-center">
+            <div
+              className="d-flex justify-content-center py-3"
+              id="btn-loading-container"
+            >
               {next ? (
                 <button
                   className="btn btn-warning"
