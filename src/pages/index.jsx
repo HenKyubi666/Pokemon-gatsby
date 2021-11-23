@@ -12,12 +12,7 @@ import FilterColors from "../components/filter-colors"
 import FilterGender from "../components/filter-gender"
 
 //API
-import {
-  getInitialPokemons,
-  getNextPokemons,
-  reOrderFormatted,
-  doFilter,
-} from "../api"
+import { getInitialPokemons, getNextPokemons, doFilter } from "../api"
 
 const IndexPage = () => {
   const [pokemons, setPokemons] = useState([])
@@ -50,20 +45,20 @@ const IndexPage = () => {
     }
   }
 
-  const filterAndSetData = async () => {
+  const filterAndSetData = useCallback(async () => {
     try {
       const data = await doFilter(filterType, filterColors, filterGender)
       setPokemons(data)
     } catch (err) {
       console.log("err fetchInitialPokemons", err)
     }
-  }
+  }, [filterType, filterColors, filterGender])
 
   useEffect(() => {
     filterType.length > 0 || filterColors.length > 0 || filterGender.length > 0
       ? filterAndSetData()
       : fetchInitialPokemons()
-  }, [filterType, filterColors, filterGender])
+  }, [filterType, filterColors, filterGender, filterAndSetData])
 
   return (
     <AppContext.Provider
